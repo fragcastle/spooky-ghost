@@ -34,20 +34,63 @@ public class BaseBehavior : MonoBehaviour
         var distance = Vector3.Distance(p1, p2);
 
         return (Camera.main.transform.position.y - distance > transform.position.y + buffer);
+	}
+	
+	/// <summary>
+	/// Is the current transform off the bottom of the screen.
+	/// </summary>
+	/// <returns></returns>
+	public bool IsBelowTheFoldX()
+	{
+		var halfWidth = Screen.width / 2;
+		
+		var p1 = Camera.main.ScreenToWorldPoint(Vector3.zero);
+		var p2 = Camera.main.ScreenToWorldPoint(new Vector3(0, halfWidth, 0));
+		var distance = Vector3.Distance(p1, p2);
+        
+        return (Camera.main.transform.position.x - distance > transform.position.x);
+	}
+	
+	/// <summary>
+	/// Is the current transform off the bottom of the screen.
+	/// </summary>
+	/// <returns></returns>
+	public bool IsBelowTheFoldX(float buffer)
+	{
+		var halfWidth = Screen.width / 2;
+		
+		var p1 = Camera.main.ScreenToWorldPoint(Vector3.zero);
+		var p2 = Camera.main.ScreenToWorldPoint(new Vector3(0, halfWidth, 0));
+		var distance = Vector3.Distance(p1, p2);
+		
+		return (Camera.main.transform.position.x - distance > transform.position.x + buffer);
     }
-
+    
     /// <summary>
     /// Width of the screen in world units.
-    /// </summary>
-    /// <returns></returns>
-    public float ScreenWidth()
-    {
-        var p1 = Camera.main.ScreenToWorldPoint(Vector3.zero);
-        var p2 = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.width, 0));
-        var distance = Vector3.Distance(p1, p2);
-
-        return distance;
-    }
+	/// </summary>
+	/// <returns></returns>
+	public float ScreenWidth()
+	{
+		var p1 = Camera.main.ScreenToWorldPoint(Vector3.zero);
+		var p2 = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.width, 0));
+		var distance = Vector3.Distance(p1, p2);
+		
+		return distance;
+	}
+	
+	/// <summary>
+	/// Width of the screen in world units.
+	/// </summary>
+	/// <returns></returns>
+	public float ScreenHeight()
+	{
+		var p1 = Camera.main.ScreenToWorldPoint(Vector3.zero);
+		var p2 = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
+		var distance = Vector3.Distance(p1, p2);
+		
+		return distance;
+	}
 
     /// <summary>
     /// The top of the screen in y world coordinates.

@@ -1,8 +1,8 @@
-Shroom Jump (Formerly known as Frag Jump)
+Fraggy Jump
 =========
 
-Available on the iOS App Store! [Get Shroom Jump for iOS](bit.ly/1wn2Kc5)!
+Soon to be available on the iOS App Store!
 
-An open source jumping game clone!
+An open source flappy bird clone!
 
-Find the demo and additional info at [Frag Castle](http://fragcastle.com/frag-jump).
+The demo and additional info will soon be available at [http://FragCastle.com](http://fragcastle.com).

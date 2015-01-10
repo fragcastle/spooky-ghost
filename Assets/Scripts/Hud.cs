@@ -61,7 +61,7 @@ public class Hud : BaseBehavior
 			return;
 		}
 
-		_text.text = _player.DistanceTraveled.ToString();
+		_text.text = _player.ObstaclesPassed.ToString();
     }
 
 	public void Pause()

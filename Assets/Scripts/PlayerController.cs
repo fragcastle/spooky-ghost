@@ -10,10 +10,8 @@ public class PlayerController : BaseBehavior
 	
 	private PlayerType _playerType;
 	
-	public float DistanceScale = 100;
-    public int DistanceTraveled = 0;
-    public int MoveForce = 10;
-    public int MaxXSpeed = 10;
+    public int ObstaclesPassed = 0;
+	public float JumpSpeed = 3.5F;
 	
 	public PlayerType PlayerType
 	{
@@ -48,15 +46,7 @@ public class PlayerController : BaseBehavior
 
     void Update()
 	{
-		if (transform.position.y * DistanceScale > DistanceTraveled)
-			DistanceTraveled = (int)(transform.position.y * DistanceScale);
-
-        if (IsBelowTheFold(1))
-        {
-			AddHighScore(DistanceTraveled);
-
-            Destroy(gameObject);
-        }
+		ObstaclesPassed = Mathf.Abs(Mathf.RoundToInt(transform.position.y));
 
         if (Mathf.Abs(rigidbody2D.velocity.y) < 1)
         {
@@ -69,57 +59,20 @@ public class PlayerController : BaseBehavior
         else
         {
             _animator.SetTrigger("Jumping");
+		}
+		
+		if (IsMobile() && Input.touchCount > 0)
+		{
+			rigidbody2D.velocity = Vector2.up * JumpSpeed;
+		}
+		else if (Input.GetButtonDown("Jump"))
+		{
+			rigidbody2D.velocity = Vector2.up * JumpSpeed;
         }
-
-        var iPx = Input.acceleration.x;
-
-        if (Input.GetKey(KeyCode.LeftArrow) || iPx < -_moveThreshold)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
-        else if (Input.GetKey(KeyCode.RightArrow) || iPx > _moveThreshold)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
+        
+        transform.Translate(Vector2.right * Time.deltaTime);
         
         _particleSystem.enableEmission = rigidbody2D.velocity.y > 0;
-    }
-
-    void FixedUpdate()
-    {
-        if (IsMobile())
-        {
-            var iPx = Input.acceleration.x;
-
-            rigidbody2D.AddForce(new Vector2(MoveForce * Time.deltaTime * 20 * iPx, 0));
-        }
-        else
-        {
-            var xInput = Input.GetAxis("Horizontal");
-
-            if (xInput != 0)
-            {
-                rigidbody2D.AddForce(new Vector2(xInput * MoveForce * Time.deltaTime * 10, 0));
-            }
-        }
-        
-        if (Mathf.Abs(rigidbody2D.velocity.x) > MaxXSpeed)
-        {
-            rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -MaxXSpeed, MaxXSpeed), rigidbody2D.velocity.y);
-        }
-
-        var screenWidth = ScreenWidth();
-        var xRight = screenWidth / 2;
-        var xLeft = -xRight;
-
-        if (transform.position.x > xRight)
-        {
-            transform.position = new Vector3(xLeft, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x < xLeft)
-        {
-            transform.position = new Vector3(xRight, transform.position.y, transform.position.z);
-        }
     }
 
 	private void AddHighScore(int score)
