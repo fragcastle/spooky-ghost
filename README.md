@@ -1,4 +1,4 @@
-Fraggy Jump
+Floaty Ghost
 =========
 
 Soon to be available on the iOS App Store!

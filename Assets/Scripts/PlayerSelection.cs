@@ -6,7 +6,6 @@ public class PlayerSelection : MonoBehaviour
 {
     private float _previousAxisInput = 0;
     private GameObject _player;
-    private Animator _playerAnimator;
     public int _playerTypeIndex = 0;
     public List<PlayerType> _playerTypes = new List<PlayerType>();
 
@@ -29,7 +28,6 @@ public class PlayerSelection : MonoBehaviour
         _playerTypeIndex = 0;
 
         _player = GameObject.Find("Player");
-        _playerAnimator = _player.GetComponent<Animator>();
         
         if (PlayerPrefs.HasKey(Constants.PlayerTypeKey))
         {
@@ -101,7 +99,6 @@ public class PlayerSelection : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        _playerAnimator.runtimeAnimatorController = GetRuntimeAnimatorController();
     }
 
     public RuntimeAnimatorController GetRuntimeAnimatorController()

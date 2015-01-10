@@ -5,7 +5,7 @@ public class PlatformDirector : BaseBehavior
 {
     private GameObject _player;
 
-    private float _lastX = 0;
+    private float _lastX = 2;
     private float _distanceToGenerate = 5;
 	
 	public Transform Platform;
@@ -20,8 +20,6 @@ public class PlatformDirector : BaseBehavior
     public float ChanceForBouncyPlatform = 0.15F;
     
     public float ChanceForDeadPlatform = 0.01F;
-
-	public AudioSource JumpSound;
 
 	public static PlatformDirector Current;
 
