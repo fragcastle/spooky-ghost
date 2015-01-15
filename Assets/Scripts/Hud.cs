@@ -17,6 +17,8 @@ public class Hud : BaseBehavior
 
     void Start()
     {
+    	Application.targetFrameRate = 300;
+    	
         _player = GameObject.Find("Player").GetComponent<PlayerController>();
         _platforms = GameObject.Find("Platforms");
         

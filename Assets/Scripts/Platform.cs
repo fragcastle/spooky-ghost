@@ -31,12 +31,4 @@ public class Platform : BaseBehavior
             Destroy(gameObject);
         }
     }
-
-    void OnTriggerEnter2D(Collider2D collision2D)
-    {
-		Destroy(collision2D.gameObject);
-		
-		if (PlatformDirector.Current)
-			PlatformDirector.Current.audio.Play();
-    }
 }

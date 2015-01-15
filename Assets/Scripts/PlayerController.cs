@@ -32,7 +32,7 @@ public class PlayerController : BaseBehavior
 
     void Update()
 	{
-		if (IsMobile() && Input.touchCount > 0)
+		if (IsMobile() && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
 		{
 			rigidbody2D.velocity = Vector2.up * JumpSpeed;
 			
@@ -49,9 +49,15 @@ public class PlayerController : BaseBehavior
         
         _particleSystem.enableEmission = rigidbody2D.velocity.y > 0;
     }
+    
+    public void OnDeath()
+    {
+		AddHighScore(ObstaclesPassed);
+    }
 
 	private void AddHighScore(int score)
 	{
+		Debug.Log("Adding High Score: " + score.ToString());
 		if (PlayerPrefs.HasKey(Constants.HighScoreKey))
 		{
 			var oldScore = PlayerPrefs.GetInt(Constants.HighScoreKey);
