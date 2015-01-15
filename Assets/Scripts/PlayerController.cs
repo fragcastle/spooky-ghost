@@ -57,7 +57,6 @@ public class PlayerController : BaseBehavior
 
 	private void AddHighScore(int score)
 	{
-		Debug.Log("Adding High Score: " + score.ToString());
 		if (PlayerPrefs.HasKey(Constants.HighScoreKey))
 		{
 			var oldScore = PlayerPrefs.GetInt(Constants.HighScoreKey);
